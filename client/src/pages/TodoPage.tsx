@@ -1,6 +1,8 @@
 import { FC } from 'react'
 
 import { Header } from '@/components/common/Header/Header'
+import { CreateArea } from '@/components/pages/todo/createArea/CreateArea'
+import { Area } from '@/components/pages/todo/todoArea/Area'
 
 
 export const TodoPage: FC = () => {
@@ -8,7 +10,8 @@ export const TodoPage: FC = () => {
     <>
       <Header />
       <div className = 'container'>
-        <h1></h1>
+        <Area />
+        <CreateArea />
       </div>
     </>
   )

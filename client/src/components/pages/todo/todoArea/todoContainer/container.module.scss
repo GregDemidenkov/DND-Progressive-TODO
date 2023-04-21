@@ -1,0 +1,31 @@
+@import '@/assets/styles/constants';
+
+
+.todoContainer {
+    flex-basis: 30%;
+    max-width: 320px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, .15);
+    box-shadow: 0px 3px 4px rgba(92, 92, 92, 0.25);
+    padding: 10px;
+
+    h3 {
+        width: 70%;
+        margin: 0 auto;
+        padding: 10px 0;
+        font-size: 18px;
+        font-weight: 500;
+        text-transform: uppercase;
+        text-align: center;
+        color: white;
+        border-bottom: 1px solid white;
+    }
+}
+
+.carts {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    height: 360px;
+    overflow-y: auto;
+}

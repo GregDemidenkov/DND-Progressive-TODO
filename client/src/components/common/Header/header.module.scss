@@ -1,0 +1,15 @@
+@import '@/assets/styles/constants.scss';
+
+.header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    padding: 10px 0;
+    box-shadow: 0px 3px 4px rgba(92, 92, 92, 0.25);
+
+    h1 {
+        font-size: 36px;
+        font-weight: 700;
+        color: $yellow;
+    }
+}

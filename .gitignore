@@ -22,3 +22,5 @@ client/*.ntvs*
 client/*.njsproj
 client/*.sln
 client/*.sw?
+
+server/node_modules

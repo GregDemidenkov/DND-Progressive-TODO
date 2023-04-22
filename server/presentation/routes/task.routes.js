@@ -9,5 +9,9 @@ router.post('/create', taskController.createTask)
 
 router.delete('/delete', taskController.deleteTask)
 
+router.patch('/rebase', taskController.updateTask)
+
+router.get('', taskController.getTasks)
+
 
 module.exports = router

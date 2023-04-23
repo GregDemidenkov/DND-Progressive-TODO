@@ -53,7 +53,7 @@ export const Cart: FC<TCart> = ({ id, type, order, text, setTask }) => {
             // onDrop = {(e: DragEvent<HTMLDivElement>) => dropHandler(e)}
             >
                 <p>{order + 1}. {text}</p>
-                <button>x</button>
+                <button onClick = {() => tasks.deleteTask(id, type)}>x</button>
         </div>
     )
 }

@@ -16,6 +16,10 @@ class TaskService {
             newType
         })
     }
+
+    async deleteTask(id: String, type: String) {
+        return await axios.delete(`${import.meta.env.VITE_PORT}${this.path}/delete?id=${id}&type=${type}`)
+    }
 }
 
 

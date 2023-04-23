@@ -25,10 +25,10 @@ export const Container: FC<TContainer> = observer(({ type }) => {
   }, [])
 
   useEffect(() => {
-    if (tasks.curInfo.id && tasks.curInfo.newType) {
+    if (tasks.curInfo.id && tasks.curInfo.newType !== tasks.curInfo.type) {
       tasks.rebaseTasks(tasks.curInfo.id, tasks.curInfo.type, tasks.curInfo.newType)
-      tasks.changeCurInfo("", "", "")
     }
+    tasks.changeCurInfo("", "", "")
   }, [tasks.curInfo.id])
 
   const setTask = (obj: TCurTask) => {

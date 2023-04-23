@@ -25,6 +25,7 @@ class Tasks {
             curInfo: observable,
             getTasks: action.bound,
             rebaseTasks: action.bound,
+            deleteTask: action.bound,
             changeCurInfo: action
         })
     }
@@ -58,6 +59,15 @@ class Tasks {
             await taskService.rebaseTasks(id, type, newType)
             this.getTasks(type);
             this.getTasks(newType);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async deleteTask(id: String, type: string) {
+        try {
+            await taskService.deleteTask(id, type)
+            this.getTasks(type);
         } catch (e) {
             console.log(e)
         }

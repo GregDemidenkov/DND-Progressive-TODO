@@ -19,7 +19,7 @@ class taskController {
 
     async deleteTask(req, res) {
         try {
-            const { id, type } = req.body
+            const { id, type } = req.query
 
             await TaskRepository.deleteTask(id, type)
 

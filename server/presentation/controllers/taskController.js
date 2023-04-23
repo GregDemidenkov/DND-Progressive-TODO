@@ -45,7 +45,7 @@ class taskController {
 
     async getTasks(req, res) {
         try {
-            const { type } = req.body
+            const { type } = req.query
 
             const tasks = await TaskRepository.getTasks(type)
 

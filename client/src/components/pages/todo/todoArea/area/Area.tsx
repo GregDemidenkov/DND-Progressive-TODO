@@ -1,23 +1,18 @@
 import { FC } from 'react'
 
-import { containerList } from './todoArea.mock'
 import { Container } from '../container/Container'
 
 import styles from './area.module.scss'
+import { observer } from 'mobx-react-lite'
 
 
-export const Area: FC = () => {
+export const Area: FC = observer(() => {
 
   return (
     <div className = {styles.todoArea}>
-        {
-          containerList.map(el => (
-              <Container 
-                key = {el.id} 
-                type = {el.type}
-              />
-          ))
-        }
+        <Container type = {"task"}/>
+        <Container type = {"process"}/>
+        <Container type = {"done"}/>
     </div>
   )
-}
+})

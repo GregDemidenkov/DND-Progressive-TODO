@@ -1,7 +1,7 @@
 const TaskRepository = require("../../infrastructure/db/repo/TaskRepository")
 
 
-class taskController {
+class TaskController {
 
 
     async createTask(req, res) {
@@ -71,4 +71,4 @@ class taskController {
 }
 
 
-module.exports = new taskController()
+module.exports = new TaskController()

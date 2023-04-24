@@ -1,7 +1,10 @@
-import { FC, DragEvent } from 'react'
+import { FC, DragEvent, useState } from 'react'
 
 import { observer } from 'mobx-react-lite'
 import tasks from '@/store/tasks'
+
+import { DeleteButton } from '@/components/ui/deleteButton/DeleteButton'
+import { CreateButton } from '@/components/ui/createButton/CreateButton'
 
 import styles from './cart.module.scss'
 
@@ -15,19 +18,20 @@ type TCart = {
 
 export const Cart: FC<TCart> = observer(({ id, type, order, text }) => {
 
+    const [dragActive, setDragActive] = useState(false)
+
     const dragOverHandler = (e: DragEvent<HTMLDivElement> | any) => {
         e.preventDefault()
-        if(e.target.className.includes("_cart_")) {
-            e.target.classList.add(styles.activeDrag)
-        }
+
+        setDragActive(true)
     }
 
-    const dragLeaveHandler = (e: DragEvent<HTMLDivElement> | any) => {
-        e.target.classList.remove(styles.activeDrag)
+    const dragLeaveHandler = () => {
+        setDragActive(false)
     }
 
-    const dragEndHandler = (e: DragEvent<HTMLDivElement> | any) => {
-        e.target.classList.remove(styles.activeDrag)
+    const dragEndHandler = () => {
+        setDragActive(false)
 
         tasks.changeCurInfo(id, type, tasks.curInfo.newType, tasks.curInfo.newOrder)
     }
@@ -35,22 +39,23 @@ export const Cart: FC<TCart> = observer(({ id, type, order, text }) => {
     const dropHandler = (e: DragEvent<HTMLDivElement> | any) => {
         e.preventDefault()
 
-        e.target.classList.remove(styles.activeDrag)
+        setDragActive(false)
 
         tasks.changeCurInfo(tasks.curInfo.id, tasks.curInfo.type, type, order)
     }
 
     return (
         <div 
-            className = {styles.cart} 
+            className = {dragActive ? `${styles.cart} ${styles.activeDrag}` : styles.cart} 
             draggable = {true}
             onDragOver = {(e: DragEvent<HTMLDivElement>) => dragOverHandler(e)}
-            onDragLeave = {(e: DragEvent<HTMLDivElement>) => dragLeaveHandler(e)}
-            onDragEnd = {(e: DragEvent<HTMLDivElement>) => dragEndHandler(e)}
+            onDragLeave = {() => dragLeaveHandler()}
+            onDragEnd = {() => dragEndHandler()}
             onDrop = {(e: DragEvent<HTMLDivElement>) => dropHandler(e)}
             >
-                <p>{order + 1}. {text}</p>
-                <button onClick = {() => tasks.deleteTask(id, type)}>x</button>
+                <p><span>{order + 1}</span> {text}</p>
+                <DeleteButton onClick = {() => tasks.deleteTask(id, type)}/>
+                <CreateButton onClick = {() => tasks.deleteTask(id, type)}/>
         </div>
     )
 })

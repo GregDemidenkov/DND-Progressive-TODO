@@ -1,0 +1,29 @@
+@import './constants.scss';
+
+body::-webkit-scrollbar {
+    background-color: $pink;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #7825af;
+    border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #7825af;
+}
+
+body::-webkit-scrollbar-button:vertical:start:decrement {
+    background: linear-gradient(120deg, $pink 40%, rgba(0, 0, 0, 0) 41%),
+        linear-gradient(240deg, $pink 40%, rgba(0, 0, 0, 0) 41%),
+        linear-gradient(0deg, $pink 30%, rgba(0, 0, 0, 0) 31%);
+    background-color: #7825af;
+}
+
+body::-webkit-scrollbar-button:vertical:end:increment {
+    background:
+        linear-gradient(300deg, $pink 40%, rgba(0, 0, 0, 0) 41%),
+        linear-gradient(60deg, $pink 40%, rgba(0, 0, 0, 0) 41%),
+        linear-gradient(180deg, $pink 30%, rgba(0, 0, 0, 0) 31%);
+    background-color: #7825af;
+}

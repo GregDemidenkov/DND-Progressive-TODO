@@ -85,6 +85,15 @@ class Tasks {
         }
     }
 
+    async createTask(text: string, type: string) {
+        try {
+            await taskService.createTask(text, type)
+            this.getTasks(type);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     changeCurInfo(id: String, type: string, newType: string, newOrder: number) {
         this.curInfo.id = id
         this.curInfo.type = type

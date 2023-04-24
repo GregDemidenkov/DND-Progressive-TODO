@@ -28,6 +28,13 @@ class TaskService {
             newOrder
         })
     }
+
+    async createTask(text: string, type: string) {
+        return await axios.post(`${import.meta.env.VITE_PORT}${this.path}/create`, {
+            text,
+            type,
+        })
+    }
 }
 
 

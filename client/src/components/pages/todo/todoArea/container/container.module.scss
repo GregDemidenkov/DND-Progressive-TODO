@@ -28,4 +28,22 @@
     margin-top: 20px;
     height: 360px;
     overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        background-color: inherit;
+        width: 8px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: #2e718f;
+        border-radius: 6px;
+    }
+    
+    &::-webkit-scrollbar-button:vertical:start:decrement {
+        display: none;
+    }
+    
+    &::-webkit-scrollbar-button:vertical:end:increment {
+        display: none;
+    }
 }

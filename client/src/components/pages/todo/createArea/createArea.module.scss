@@ -1,0 +1,37 @@
+@import '@/assets/styles/constants';
+
+.wrapper {
+    width: 50%;
+    height: 100px;
+    margin: 80px auto 40px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.092);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    input {
+        flex-basis: 80%;
+        padding: 10px 5px;
+        outline: none;
+        border-radius: 4px;
+        background-color: $white;
+        font-size: 18px;
+    }
+
+    button {
+        flex-basis: 10%;
+        padding: 10px 5px;
+        border-radius: 4px;
+        background-color: $yellow;
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+        box-shadow: 0px 3px 4px rgba(92, 92, 92, 0.25);
+        cursor: pointer;
+
+        &:hover {
+            opacity: .7;
+        }
+    }
+}

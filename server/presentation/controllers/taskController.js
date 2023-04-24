@@ -30,11 +30,11 @@ class taskController {
         }
     }
 
-    async updateTask(req, res) {
+    async rebaseTask(req, res) {
         try {
             const { id, type, newType } = req.body
 
-            const task = await TaskRepository.updateTask(id, type, newType)
+            const task = await TaskRepository.rebaseTask(id, type, newType)
            
             return res.json(task)
         } catch (e) {
@@ -50,6 +50,19 @@ class taskController {
             const tasks = await TaskRepository.getTasks(type)
 
             return res.json(tasks)
+        } catch (e) {
+            console.log(e)
+            return res.status(400).json(e)
+        }
+    }
+
+    async insertTask(req, res) {
+        try {
+            const { id, newType, newOrder } = req.body
+
+            await TaskRepository.insertTask(id, newType, newOrder)
+
+            return res.json({message: 'File was inserted'})
         } catch (e) {
             console.log(e)
             return res.status(400).json(e)

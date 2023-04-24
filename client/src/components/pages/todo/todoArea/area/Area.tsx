@@ -3,10 +3,9 @@ import { FC } from 'react'
 import { Container } from '../container/Container'
 
 import styles from './area.module.scss'
-import { observer } from 'mobx-react-lite'
 
 
-export const Area: FC = observer(() => {
+export const Area: FC = () => {
 
   return (
     <div className = {styles.todoArea}>
@@ -15,4 +14,4 @@ export const Area: FC = observer(() => {
         <Container type = {"done"}/>
     </div>
   )
-})
+}

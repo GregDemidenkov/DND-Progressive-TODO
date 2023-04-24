@@ -1,22 +1,18 @@
-import { FC, DragEvent, useEffect, useState, useReducer } from 'react'
+import { FC, DragEvent, useEffect } from 'react'
+
+import { observer } from 'mobx-react-lite'
+import tasks from '@/store/tasks'
+
+import getBoard from '@/utils/getBoard'
+
+import { Cart } from '../cart/Cart'
 
 import styles from './container.module.scss'
-import tasks from '@/store/tasks'
-import getBoard from '@/utils/getBoard'
-import { Cart } from '../cart/Cart'
-import { observer } from 'mobx-react-lite'
 
 
 type TContainer = {
   type: string,
 }
-
-export type TCurTask = {
-  id: String,
-  type: string,
-  newType: string
-}
-
 
 export const Container: FC<TContainer> = observer(({ type }) => {
 
@@ -25,31 +21,31 @@ export const Container: FC<TContainer> = observer(({ type }) => {
   }, [])
 
   useEffect(() => {
-    if (tasks.curInfo.id && tasks.curInfo.newType !== tasks.curInfo.type) {
-      tasks.rebaseTasks(tasks.curInfo.id, tasks.curInfo.type, tasks.curInfo.newType)
+    if (tasks.curInfo.id && tasks.curInfo.newType !== tasks.curInfo.type && tasks.curInfo.newOrder === -1) {
+      tasks.rebaseTasks(
+        tasks.curInfo.id, 
+        tasks.curInfo.type, 
+        tasks.curInfo.newType
+      )
+    } else if(tasks.curInfo.id && tasks.curInfo.newType !== tasks.curInfo.type && tasks.curInfo.newOrder !== -1) {
+      tasks.insertTask(
+        tasks.curInfo.id,
+        tasks.curInfo.type,
+        tasks.curInfo.newType,
+        tasks.curInfo.newOrder
+      )
     }
-    tasks.changeCurInfo("", "", "")
+    tasks.changeCurInfo("", "", "", -1)
   }, [tasks.curInfo.id])
-
-  const setTask = (obj: TCurTask) => {
-    tasks.changeCurInfo(obj.id, obj.type, tasks.curInfo.newType)
-  }
 
   const dropHandler = (e: DragEvent<HTMLDivElement>) => {
       e.preventDefault()
 
-      tasks.changeCurInfo(tasks.curInfo.id, tasks.curInfo.type, type)
+      tasks.changeCurInfo(tasks.curInfo.id, tasks.curInfo.type, type, tasks.curInfo.newOrder)
   }
 
   const dragOverHandler = (e: DragEvent<HTMLDivElement> | any) => {
     e.preventDefault()
-    // if(e.target.className.includes("_cart_")) {
-    //     e.target.style.boxShadow = "0px 3px 4px rgba(92, 92, 92, 0.45)"
-    // }
-  }
-
-  const dragLeaveHandler = (e: DragEvent<HTMLDivElement> | any) => {
-    // e.target.style.boxShadow = "none"
   }
   
   return (
@@ -58,7 +54,6 @@ export const Container: FC<TContainer> = observer(({ type }) => {
       <div  
         onDrop = {(e: DragEvent<HTMLDivElement>) => dropHandler(e)}
         onDragOver = {(e: DragEvent<HTMLDivElement>) => dragOverHandler(e)}
-        onDragLeave = {(e: DragEvent<HTMLDivElement>) => dragLeaveHandler(e)}
         className = {styles.carts}>
         {
           getBoard(type).map((cart, i) => (
@@ -68,7 +63,6 @@ export const Container: FC<TContainer> = observer(({ type }) => {
               type = {type}
               order = {cart.order.valueOf()}
               text = {cart.text}
-              setTask = {(obj: TCurTask) => setTask(obj)}
             />
           ))
         }

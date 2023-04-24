@@ -5,11 +5,14 @@
     justify-content: space-between;
     align-items: center;
     height: 50px;
-    background: #49c6fb78;
-    border: 1px solid rgba(0, 0, 0, .15);
+    // background: #49c6fb78;
+    background-color: rgba(0, 0, 0, 0.092);
+    border: 1px solid rgba(0, 0, 0, 0.047);
     border-radius: 4px;
     margin: 0 4px 10px 4px;
     padding: 10px 8px;
+    cursor: grab;
+    transition: all .2s;
 
     p {
         font-size: 14px;
@@ -28,3 +31,9 @@
         }
     }
 }
+
+
+.activeDrag {
+    border-top: 72px solid rgba(87, 87, 87, 0.15);
+    transition: all .4s;
+} 

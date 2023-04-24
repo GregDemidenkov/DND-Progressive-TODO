@@ -1,12 +1,13 @@
 import taskService from "@/services/taskService"
 import { ETypes } from "@/types/constants"
 import { ITask } from "@/types/tasks"
-import { action, makeAutoObservable, makeObservable, observable, runInAction } from "mobx"
+import { action, makeObservable, observable, runInAction } from "mobx"
 
 type TCurInfo = {
     id: String,
     type: string,
-    newType: string
+    newType: string,
+    newOrder: number
 }
 
 class Tasks {
@@ -25,6 +26,7 @@ class Tasks {
             curInfo: observable,
             getTasks: action.bound,
             rebaseTasks: action.bound,
+            insertTask: action.bound,
             deleteTask: action.bound,
             changeCurInfo: action
         })
@@ -64,6 +66,16 @@ class Tasks {
         }
     }
 
+    async insertTask(id: String, type: string, newType: string, newOrder: number) {
+        try {
+            await taskService.insertTask(id, newType, newOrder)
+            this.getTasks(type);
+            this.getTasks(newType);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async deleteTask(id: String, type: string) {
         try {
             await taskService.deleteTask(id, type)
@@ -73,10 +85,11 @@ class Tasks {
         }
     }
 
-    changeCurInfo(id: String, type: string, newType: string) {
+    changeCurInfo(id: String, type: string, newType: string, newOrder: number) {
         this.curInfo.id = id
         this.curInfo.type = type
         this.curInfo.newType = newType
+        this.curInfo.newOrder = newOrder
     }
 }
 

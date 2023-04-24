@@ -20,6 +20,14 @@ class TaskService {
     async deleteTask(id: String, type: String) {
         return await axios.delete(`${import.meta.env.VITE_PORT}${this.path}/delete?id=${id}&type=${type}`)
     }
+
+    async insertTask(id: String, newType: String, newOrder: Number) {
+        return await axios.post(`${import.meta.env.VITE_PORT}${this.path}/insert`, {
+            id,
+            newType,
+            newOrder
+        })
+    }
 }
 
 

@@ -8,7 +8,7 @@ class TaskController {
         try {
             const { text, type } = req.body
 
-            const task = await TaskRepository.createTask(text, type)
+            await TaskRepository.createTask(text, type)
            
             return res.json({message: 'Task was created'})
         } catch (e) {
@@ -21,7 +21,7 @@ class TaskController {
         try {
             const { type } = req.query
 
-            const tasks = await TaskRepository.getTasks(type)
+            const tasks = await TaskRepository.repo.getTasks(type)
 
             return res.json(tasks)
         } catch (e) {

@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-@import './constants.scss';
 
 html,
 body,
@@ -101,9 +100,6 @@ body {
     letter-spacing: 1.2px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(90deg, $blue 0%, $pink 100%);
 }
 
 #root {

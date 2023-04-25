@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 50px;
+    height: auto;
     background-color: rgba(0, 0, 0, 0.092);
     border: 1px solid rgba(0, 0, 0, 0.047);
     border-radius: 4px;
@@ -15,14 +15,22 @@
     cursor: grab;
     transition: all .2s;
 
+    &:last-child {
+        margin-bottom: 40px;
+    }
+
     p {
         margin-top: 10px;
         width: 90%;
         height: 100%;
         font-size: 14px;
         color: white;
-        text-align: justify;
-        z-index: -1000;
+        text-align: center;
+        z-index: -1;
+
+        @media (max-width: 991px) {
+            font-size: 10px;
+        }
     }
 }
 

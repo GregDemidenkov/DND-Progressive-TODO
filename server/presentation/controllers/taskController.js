@@ -21,7 +21,7 @@ class TaskController {
         try {
             const { type } = req.query
 
-            const tasks = await TaskRepository.repo.getTasks(type)
+            const tasks = await TaskRepository.getTasks(type)
 
             return res.json(tasks)
         } catch (e) {

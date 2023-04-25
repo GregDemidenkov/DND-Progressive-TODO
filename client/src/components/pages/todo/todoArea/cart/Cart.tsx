@@ -20,7 +20,7 @@ export const Cart: FC<TCart> = observer(({ id, type, order, text }) => {
 
     const [dragActive, setDragActive] = useState(false)
 
-    const dragOverHandler = (e: DragEvent<HTMLDivElement> | any) => {
+    const dragOverHandler = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault()
 
         setDragActive(true)
@@ -36,7 +36,7 @@ export const Cart: FC<TCart> = observer(({ id, type, order, text }) => {
         tasks.changeCurInfo(id, tasks.curInfo.id_2, type, tasks.curInfo.newType, tasks.curInfo.newOrder)
     }
     
-    const dropHandler = (e: DragEvent<HTMLDivElement> | any) => {
+    const dropHandler = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault()
 
         setDragActive(false)
@@ -57,7 +57,7 @@ export const Cart: FC<TCart> = observer(({ id, type, order, text }) => {
             onDragEnd = {() => dragEndHandler()}
             onDrop = {(e: DragEvent<HTMLDivElement>) => dropHandler(e)}
             >
-                <p><span>{order + 1}</span> {text}</p>
+                <p>{text}</p>
                 <DeleteButton onClick = {() => tasks.deleteTask(id, type)}/>
                 <EditButton onClick = {!tasks.editInfo.status ? () => editHandler() : () => {}}/>
         </div>

@@ -40,7 +40,7 @@ export const Container: FC<TContainer> = observer(({ type }) => {
     )
   }
 
-  const dragOverHandler = (e: DragEvent<HTMLDivElement> | any) => {
+  const dragOverHandler = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
   }
   

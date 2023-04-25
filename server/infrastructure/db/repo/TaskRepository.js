@@ -56,8 +56,11 @@ class TaskRepository {
 
     async insertTask(id, newType, newOrder) {
         const newTasks = await Task.find({ type: newType })
-
         const task = await Task.findOne({ _id: id })
+
+        const type = task.type
+        const order = task.order
+
         task.order = newOrder
         task.type = newType
 
@@ -69,6 +72,47 @@ class TaskRepository {
         })
 
         await task.save()
+
+        const tasks = await Task.find({ type: type })
+        
+
+        tasks.forEach(task_el => {
+            if(task_el.order >= order) {
+                task_el.order -= 1
+                task_el.save()
+            }
+        })
+
+    }
+
+    async reorderTask(id_1, id_2) {
+        const task_1 = await Task.findOne({ _id: id_1 })
+        const task_2 = await Task.findOne({ _id: id_2 })
+        const tasks = await Task.find({type: task_1.type})
+
+        const order_2 = task_2.order
+        const order_1 = task_1.order
+
+        if(order_1 > order_2) {
+            tasks.forEach(task_el => {
+                if(task_el.order >= order_2 && task_el.order < order_1) {
+                    task_el.order += 1
+                    task_el.save()
+                }
+            })
+            task_1.order = order_2
+        } else {
+            tasks.forEach(task_el => {
+                if(task_el.order < order_2 && task_el.order > order_1) {
+                    console.log(task_el)
+                    task_el.order -= 1
+                    task_el.save()
+                }
+            })
+            task_1.order = order_2 - 1
+        }
+
+        await task_1.save()
     }
 
     async editTask(id, newText) {

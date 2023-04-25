@@ -33,7 +33,7 @@ export const Cart: FC<TCart> = observer(({ id, type, order, text }) => {
     const dragEndHandler = () => {
         setDragActive(false)
 
-        tasks.changeCurInfo(id, type, tasks.curInfo.newType, tasks.curInfo.newOrder)
+        tasks.changeCurInfo(id, tasks.curInfo.id_2, type, tasks.curInfo.newType, tasks.curInfo.newOrder)
     }
     
     const dropHandler = (e: DragEvent<HTMLDivElement> | any) => {
@@ -41,7 +41,7 @@ export const Cart: FC<TCart> = observer(({ id, type, order, text }) => {
 
         setDragActive(false)
 
-        tasks.changeCurInfo(tasks.curInfo.id, tasks.curInfo.type, type, order)
+        tasks.changeCurInfo(tasks.curInfo.id, id, tasks.curInfo.type, type, order)
     }
 
     const editHandler = () => {

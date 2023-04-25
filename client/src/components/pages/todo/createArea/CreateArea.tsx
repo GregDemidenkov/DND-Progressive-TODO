@@ -11,7 +11,9 @@ export const CreateArea: FC = observer(() => {
   const [curText, setCurText] = useState("")
 
   useEffect(() => {
-    if(tasks.editInfo.status) setCurText(tasks.editInfo.text)
+    if(tasks.editInfo.status) {
+      setCurText(tasks.editInfo.text)
+    }
   }, [tasks.editInfo.status])
 
   const saveHandler = () => {

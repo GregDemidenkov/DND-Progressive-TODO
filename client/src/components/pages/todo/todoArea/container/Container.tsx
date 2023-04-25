@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite'
 import tasks from '@/store/tasks'
 
 import getBoard from '@/utils/getBoard'
+import operationDefinition from '@/utils/operationDefinition'
 
 import { Cart } from '../cart/Cart'
 
@@ -21,27 +22,22 @@ export const Container: FC<TContainer> = observer(({ type }) => {
   }, [])
 
   useEffect(() => {
-    if (tasks.curInfo.id && tasks.curInfo.newType !== tasks.curInfo.type && tasks.curInfo.newOrder === -1) {
-      tasks.rebaseTasks(
-        tasks.curInfo.id, 
-        tasks.curInfo.type, 
-        tasks.curInfo.newType
-      )
-    } else if(tasks.curInfo.id && tasks.curInfo.newType !== tasks.curInfo.type && tasks.curInfo.newOrder !== -1) {
-      tasks.insertTask(
-        tasks.curInfo.id,
-        tasks.curInfo.type,
-        tasks.curInfo.newType,
-        tasks.curInfo.newOrder
-      )
-    }
-    tasks.changeCurInfo("", "", "", -1)
+    const {id, id_2, type, newType, newOrder} = tasks.curInfo
+
+    operationDefinition(id, id_2, type, newType, newOrder)
+    tasks.changeCurInfo("", "", "", "", -1)
   }, [tasks.curInfo.id])
 
   const dropHandler = (e: DragEvent<HTMLDivElement>) => {
-      e.preventDefault()
+    e.preventDefault()
 
-      tasks.changeCurInfo(tasks.curInfo.id, tasks.curInfo.type, type, tasks.curInfo.newOrder)
+    tasks.changeCurInfo(
+      tasks.curInfo.id,
+      tasks.curInfo.id_2,
+      tasks.curInfo.type,
+      type, 
+      tasks.curInfo.newOrder
+    )
   }
 
   const dragOverHandler = (e: DragEvent<HTMLDivElement> | any) => {
@@ -62,7 +58,7 @@ export const Container: FC<TContainer> = observer(({ type }) => {
               id = {cart._id}
               type = {type}
               order = {cart.order.valueOf()}
-              text = {cart.text}
+              text = {cart.text.toString()}
             />
           ))
         }

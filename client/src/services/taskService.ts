@@ -36,6 +36,13 @@ class TaskService {
         })
     }
 
+    async reorderTask(id_1: String, id_2: String) {
+        return await axios.patch(`${import.meta.env.VITE_PORT}${this.path}/reorder`, {
+            id_1,
+            id_2
+        })
+    }
+
     async editTask(id: String, newText: string) {
         return await axios.patch(`${import.meta.env.VITE_PORT}${this.path}/edit`, {
             id,

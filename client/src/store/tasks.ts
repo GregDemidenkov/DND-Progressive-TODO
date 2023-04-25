@@ -5,6 +5,7 @@ import { action, makeObservable, observable, runInAction } from "mobx"
 
 type TCurInfo = {
     id: String,
+    id_2: String,
     type: string,
     newType: string,
     newOrder: number
@@ -43,12 +44,14 @@ class Tasks {
             getTasks: action.bound,
             rebaseTasks: action.bound,
             insertTask: action.bound,
+            reorderTask: action.bound,
             deleteTask: action.bound,
         })
     }
 
-    changeCurInfo(id: String, type: string, newType: string, newOrder: number) {
+    changeCurInfo(id: String, id_2: String, type: string, newType: string, newOrder: number) {
         this.curInfo.id = id
+        this.curInfo.id_2 = id_2
         this.curInfo.type = type
         this.curInfo.newType = newType
         this.curInfo.newOrder = newOrder
@@ -118,6 +121,15 @@ class Tasks {
             await taskService.insertTask(id, newType, newOrder)
             this.getTasks(type);
             this.getTasks(newType);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async reorderTask(id_1: String, id_2: String, type: string) {
+        try {
+            await taskService.reorderTask(id_1, id_2)
+            this.getTasks(type);
         } catch (e) {
             console.log(e)
         }

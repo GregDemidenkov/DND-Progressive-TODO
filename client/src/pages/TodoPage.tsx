@@ -6,6 +6,7 @@ import { Area } from '@/components/pages/todo/todoArea/area/Area'
 
 
 export const TodoPage: FC = () => {
+  
   return (
     <>
       <Header />

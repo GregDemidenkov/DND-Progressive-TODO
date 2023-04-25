@@ -10,7 +10,7 @@ class TaskController {
 
             const task = await TaskRepository.createTask(text, type)
            
-            return res.json({message: 'File was created'})
+            return res.json({message: 'Task was created'})
         } catch (e) {
             console.log(e)
             return res.status(400).json(e)
@@ -36,7 +36,7 @@ class TaskController {
 
             await TaskRepository.deleteTask(id, type)
 
-            return res.json({message: 'File was deleted'})
+            return res.json({message: 'Task was deleted'})
         } catch (e) {
             console.log(e)
             return res.status(400).json(e)
@@ -62,7 +62,20 @@ class TaskController {
 
             await TaskRepository.insertTask(id, newType, newOrder)
 
-            return res.json({message: 'File was inserted'})
+            return res.json({message: 'Task was inserted'})
+        } catch (e) {
+            console.log(e)
+            return res.status(400).json(e)
+        }
+    }
+
+    async reorderTask(req, res) {
+        try {
+            const { id_1, id_2 } = req.body
+
+            await TaskRepository.reorderTask(id_1, id_2)
+
+            return res.json({message: 'Tasks were reordered'})
         } catch (e) {
             console.log(e)
             return res.status(400).json(e)
@@ -75,7 +88,7 @@ class TaskController {
 
             await TaskRepository.editTask(id, newText)
 
-            return res.json({message: 'File was edit'})
+            return res.json({message: 'Task was edited'})
         } catch (e) {
             console.log(e)
             return res.status(400).json(e)

@@ -1,15 +1,27 @@
-import { FC, useState, ChangeEvent } from 'react'
+import { FC, useState, ChangeEvent, useEffect } from 'react'
 
-import styles from './createArea.module.scss'
+import { observer } from 'mobx-react-lite'
 import tasks from '@/store/tasks'
 
-export const CreateArea: FC = () => {
+import styles from './createArea.module.scss'
+
+
+export const CreateArea: FC = observer(() => {
 
   const [curText, setCurText] = useState("")
 
-  const createTaskHandler = () => {
+  useEffect(() => {
+    if(tasks.editInfo.status) setCurText(tasks.editInfo.text)
+  }, [tasks.editInfo.status])
+
+  const saveHandler = () => {
     if (curText.length > 0 && curText.length < 100) {
-      tasks.createTask(curText, "task")
+      if (tasks.editInfo.status) {
+        tasks.editTask(tasks.editInfo.id, curText, tasks.editInfo.type)
+      } else {
+        tasks.createTask(curText, "task")
+      }
+      tasks.setEditInfo("", "", "", false)
       setCurText("")
     }
   }
@@ -22,7 +34,7 @@ export const CreateArea: FC = () => {
         value = {curText}
         onChange = {(e: ChangeEvent<HTMLInputElement>) => setCurText(e.target.value)}
       />
-      <button onClick = {() => createTaskHandler()}>Save</button>
+      <button onClick = {() => saveHandler()}>Save</button>
     </div>
   )
-}
+})

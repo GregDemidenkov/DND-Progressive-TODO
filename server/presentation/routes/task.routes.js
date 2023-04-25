@@ -11,6 +11,7 @@ router.post('/insert', TaskController.insertTask)
 router.delete('/delete', TaskController.deleteTask)
 
 router.patch('/rebase', TaskController.rebaseTask)
+router.patch('/edit', TaskController.editTask)
 
 router.get('', TaskController.getTasks)
 

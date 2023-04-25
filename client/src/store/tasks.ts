@@ -10,6 +10,13 @@ type TCurInfo = {
     newOrder: number
 }
 
+type TEditInfo = {
+    id: String,
+    type: string,
+    text: string,
+    status: boolean
+}
+
 class Tasks {
 
     tasksBoard: ITask[] = []
@@ -17,6 +24,12 @@ class Tasks {
     doneBoard: ITask[] = []
 
     curInfo = {} as TCurInfo
+    editInfo = {
+        id: "",
+        type: "",
+        text: "",
+        status: false
+    } as TEditInfo
 
     constructor() {
         makeObservable(this, {
@@ -24,12 +37,37 @@ class Tasks {
             processBoard: observable,
             doneBoard: observable,
             curInfo: observable,
+            editInfo: observable,
+            changeCurInfo: action,
+            setEditInfo: action,
             getTasks: action.bound,
             rebaseTasks: action.bound,
             insertTask: action.bound,
             deleteTask: action.bound,
-            changeCurInfo: action
         })
+    }
+
+    changeCurInfo(id: String, type: string, newType: string, newOrder: number) {
+        this.curInfo.id = id
+        this.curInfo.type = type
+        this.curInfo.newType = newType
+        this.curInfo.newOrder = newOrder
+    }
+
+    setEditInfo(id: String, type: string, text: string, status: boolean) {
+        this.editInfo.id = id
+        this.editInfo.type = type
+        this.editInfo.text = text
+        this.editInfo.status = status
+    }
+
+    async createTask(text: string, type: string) {
+        try {
+            await taskService.createTask(text, type)
+            this.getTasks(type);
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     async getTasks(type: string) {
@@ -56,6 +94,15 @@ class Tasks {
         }
     }
 
+    async deleteTask(id: String, type: string) {
+        try {
+            await taskService.deleteTask(id, type)
+            this.getTasks(type);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async rebaseTasks(id: String, type: string, newType: string) {
         try {
             await taskService.rebaseTasks(id, type, newType)
@@ -76,29 +123,13 @@ class Tasks {
         }
     }
 
-    async deleteTask(id: String, type: string) {
+    async editTask(id: String, newText: string, type: string) {
         try {
-            await taskService.deleteTask(id, type)
+            await taskService.editTask(id, newText)
             this.getTasks(type);
         } catch (e) {
             console.log(e)
         }
-    }
-
-    async createTask(text: string, type: string) {
-        try {
-            await taskService.createTask(text, type)
-            this.getTasks(type);
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    changeCurInfo(id: String, type: string, newType: string, newOrder: number) {
-        this.curInfo.id = id
-        this.curInfo.type = type
-        this.curInfo.newType = newType
-        this.curInfo.newOrder = newOrder
     }
 }
 

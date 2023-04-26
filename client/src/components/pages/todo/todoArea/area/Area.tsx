@@ -7,11 +7,11 @@ import styles from './area.module.scss'
 
 export const Area: FC = () => {
 
-  return (
-    <div className = {styles.todoArea}>
-        <Container type = {"task"}/>
-        <Container type = {"process"}/>
-        <Container type = {"done"}/>
-    </div>
-  )
+    return (
+        <div className = {styles.todoArea}>
+            <Container type = {"task"}/>
+            <Container type = {"process"}/>
+            <Container type = {"done"}/>
+        </div>
+    )
 }

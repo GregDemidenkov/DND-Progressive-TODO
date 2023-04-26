@@ -7,13 +7,13 @@ import { Area } from '@/components/pages/todo/todoArea/area/Area'
 
 export const TodoPage: FC = () => {
   
-  return (
-    <>
-      <Header />
-      <div className = 'container'>
-        <Area />
-        <CreateArea />
-      </div>
-    </>
-  )
+    return (
+        <>
+            <Header />
+            <div className = 'container'>
+                <Area />
+                <CreateArea />
+            </div>
+        </>
+    )
 }

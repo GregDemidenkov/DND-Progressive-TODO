@@ -15,7 +15,7 @@
 ## Backend:
 
 - Express
-- Mongoose
+- MongoDB(mongoose)
 - Config
   <br/><br/>
 

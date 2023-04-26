@@ -65,6 +65,8 @@
         }
 
         &:active {
+            border: none;
+            outline: none;
             transform: translateY(4px);
         }
     }

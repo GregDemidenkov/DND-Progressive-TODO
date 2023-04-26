@@ -3,6 +3,8 @@ import { FC, useState, ChangeEvent, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import tasks from '@/store/tasks'
 
+import scrollAnimation from '@/utils/scrollAnimation'
+
 import styles from './createArea.module.scss'
 
 
@@ -18,18 +20,19 @@ export const CreateArea: FC = observer(() => {
 
     const saveHandler = () => {
         if (curText.length > 0 && curText.length < 100) {
-        if (tasks.editInfo.status) {
-            tasks.editTask(tasks.editInfo.id, curText, tasks.editInfo.type)
-        } else {
-            tasks.createTask(curText, "task")
-        }
-        tasks.setEditInfo("", "", "", false)
-        setCurText("")
+            if (tasks.editInfo.status) {
+                tasks.editTask(tasks.editInfo.id, curText, tasks.editInfo.type)
+            } else {
+                tasks.createTask(curText, "task")
+            }
+            tasks.setEditInfo("", "", "", false)
+            setCurText("")
+            scrollAnimation("header")
         }
     }
 
     return (
-        <div className = {styles.wrapper}>
+        <div id = "createArea" className = {styles.wrapper}>
             <input 
                 type = "text" 
                 placeholder = 'Enter a task...'

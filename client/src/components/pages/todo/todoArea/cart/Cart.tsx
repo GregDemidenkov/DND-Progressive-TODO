@@ -6,6 +6,8 @@ import tasks from '@/store/tasks'
 import { DeleteButton } from '@/components/ui/deleteButton/DeleteButton'
 import { EditButton } from '@/components/ui/editButton/EditButton'
 
+import scrollAnimation from '@/utils/scrollAnimation'
+
 import styles from './cart.module.scss'
 
 
@@ -46,6 +48,7 @@ export const Cart: FC<TCart> = observer(({ id, type, order, text }) => {
 
     const editHandler = () => {
         tasks.setEditInfo(id, type, text, true)
+        scrollAnimation("createArea")
     }
 
     return (

@@ -8,17 +8,17 @@ import { EditButton } from '@/components/ui/editButton/EditButton'
 
 import scrollAnimation from '@/utils/scrollAnimation'
 
-import styles from './cart.module.scss'
+import styles from './card.module.scss'
 
 
-type TCart = {
+type TCard = {
     id: String,
     type: string,
     order: number,
     text: string,
 }
 
-export const Cart: FC<TCart> = observer(({ id, type, order, text }) => {
+export const Card: FC<TCard> = observer(({ id, type, order, text }) => {
 
     const [dragActive, setDragActive] = useState(false)
 
@@ -53,7 +53,7 @@ export const Cart: FC<TCart> = observer(({ id, type, order, text }) => {
 
     return (
         <div 
-            className = {dragActive ? `${styles.cart} ${styles.activeDrag}` : styles.cart} 
+            className = {dragActive ? `${styles.card} ${styles.activeDrag}` : styles.card} 
             draggable = {true}
             onDragOver = {(e: DragEvent<HTMLDivElement>) => dragOverHandler(e)}
             onDragLeave = {() => dragLeaveHandler()}

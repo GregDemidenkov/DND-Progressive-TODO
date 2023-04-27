@@ -6,7 +6,7 @@ import tasks from '@/store/tasks'
 import getBoard from '@/utils/getBoard'
 import operationDefinition from '@/utils/operationDefinition'
 
-import { Cart } from '../cart/Cart'
+import { Card } from '../card/Card'
 
 import styles from './container.module.scss'
 
@@ -49,15 +49,15 @@ export const Container: FC<TContainer> = observer(({ type }) => {
             <div  
                 onDrop = {(e: DragEvent<HTMLDivElement>) => dropHandler(e)}
                 onDragOver = {(e: DragEvent<HTMLDivElement>) => dragOverHandler(e)}
-                className = {styles.carts}>
+                className = {styles.cards}>
                 {
                     getBoard(type).map((cart, i) => (
-                        <Cart 
-                        key = {i}
-                        id = {cart._id}
-                        type = {type}
-                        order = {cart.order.valueOf()}
-                        text = {cart.text.toString()}
+                        <Card 
+                            key = {i}
+                            id = {cart._id}
+                            type = {type}
+                            order = {cart.order.valueOf()}
+                            text = {cart.text.toString()}
                         />
                     ))
                 }
